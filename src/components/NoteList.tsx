@@ -1,23 +1,27 @@
-import React from 'react'
-import { Note } from './types' 
-
+import React from 'react';
+import {type Note } from '../types';
+ 
 interface NoteListProps {
   notes: Note[];
 }
-
-
-const NoteList = ({ notes }: NoteListProps) => {
+ 
+const NoteList: React.FC<NoteListProps> = ({ notes }) => {
   return (
-    <div style={{ marginTop: '20px' }}>
-      <h3>My Notes</h3>
-      
-      {notes.map((note) => (
-        <div key={note.id} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '5px', borderRadius: '5px' }}>
-          {note.text}
-        </div>
-      ))}
+    <div>
+      <h3>Notes</h3>
+      {notes.length === 0 ? (
+        <p>No notes yet.</p>
+      ) : (
+        <ul>
+          {notes.map((note) => (
+            <li key={note.id}>
+              {note.text}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
-  )
-}
-
-export default NoteList
+  );
+};
+ 
+export default NoteList;

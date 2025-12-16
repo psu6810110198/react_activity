@@ -1,32 +1,27 @@
-import { useState } from 'react' 
-import './App.css'
-import NoteForm from './NoteForm'
-import NoteList from './NoteList'
-import { Note } from './types' 
+import { useState } from 'react';
+import NoteForm from './components/NoteForm'; 
+import NoteList from './components/NoteList';
+import { type Note } from './types';
+ 
 function App() {
-  
-  const [notes, setNotes] = useState<Note[]>([])
-
-  
+  const [notes, setNotes] = useState<Note[]>([]);
+ 
   const addNote = (text: string) => {
     const newNote: Note = {
-      id: Date.now(), 
-      text: text
-    }
-    
-    setNotes([...notes, newNote])
-    console.log("Added:", newNote) 
-  }
-
+      id: Date.now(),
+      text: text,
+    };
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+  };
+  
+ 
   return (
     <div className="App">
-      <h1>Sticky Notes</h1>
-    
+      <h1>Persistent Sticky Notes</h1>
       <NoteForm onAdd={addNote} />
-      <hr />
-      <NoteList />
+      <NoteList notes={notes} />
     </div>
-  )
+  );
 }
-
-export default App
+ 
+export default App;
